@@ -120,3 +120,32 @@ main {
 .text-bold {
   font-weight: bold;
 }
+
+  /* Add styles for the popup */
+  .subscribe-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff; /* Adjust as needed */
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1000; /* Ensure the popup is on top of the overlay */
+    width: 650px; /* Adjust as needed */
+  }
+  
+  /* Add styles for the form within the popup */
+  #mc_embed_signup {
+    background:#fff; 
+    clear:left; font:14px Helvetica,Arial,sans-serif; width: 600px;
+ 
+  }
+
+#subscribeBtn{
+     width: 100px;
+    height: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color:rgb(12, 91, 12) ;
+}
