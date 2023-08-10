@@ -36,7 +36,7 @@ function reducer(state, action) {
 }
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://greenlife-deploy-5.onrender.com',
 });
 
 export default function OrderScreen() {
@@ -79,7 +79,7 @@ export default function OrderScreen() {
       try {
         dispatch({ type: 'PAY_REQUEST' });
         const { data } = await axios.put(
-          `/api/orders/${order._id}/pay`,
+          `https://greenlife-deploy-5.onrender.com/api/orders/${order._id}/pay`,
           details,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
@@ -113,7 +113,7 @@ export default function OrderScreen() {
   if (!order._id || vnpResponseCode === '00') {
     // Payment successful, update the order status
     axios.put(
-      `/api/orders/${order._id}/pay`, 
+      `https://greenlife-deploy-5.onrender.com/api/orders/${order._id}/pay`, 
       {
         id: urlParams.get('vnp_TransactionNo'),
         status: 'COMPLETED',
@@ -137,7 +137,7 @@ export default function OrderScreen() {
     const fetchOrder = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/orders/${orderId}`, {
+        const { data } = await axios.get(`https://greenlife-deploy-5.onrender.com/api/orders/${orderId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -156,7 +156,7 @@ export default function OrderScreen() {
       }
     } else {
       const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get('/api/keys/paypal', {
+        const { data: clientId } = await axios.get('https://greenlife-deploy-5.onrender.com/api/keys/paypal', {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         paypalDispatch({

@@ -37,7 +37,7 @@ export default function ProfileScreen() {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        '/api/users/profile',
+        'https://greenlife-deploy-5.onrender.com/api/users/profile',
         {
           name,
           email,

@@ -2,7 +2,7 @@
 
 
 async function getShippingFeeGHTK(city, dis){
-  const proxyUrl = 'http://localhost:3001/api/shipment/fee';
+  const proxyUrl = 'https://greenlife-deploy-5.onrender.com/api/shipment/fee';
 
 
 const requestBody = {
