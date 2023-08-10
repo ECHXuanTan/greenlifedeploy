@@ -27,9 +27,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: ['https://deploy-greenlife.vercel.app'],
-  methods: ['POST', 'GET'],
-  credentials: true
+  origin: 'http://localhost:3000'
 }));
 
 app.use('/api/proxy', createProxyMiddleware({
