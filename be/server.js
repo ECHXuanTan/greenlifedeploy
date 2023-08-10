@@ -27,7 +27,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: 'https://deploy-fe-greenlife.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true  // If you're using cookies or authentication
 }));
 
 app.use('/api/proxy', createProxyMiddleware({
