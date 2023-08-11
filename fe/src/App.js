@@ -30,6 +30,7 @@ import Button from 'react-bootstrap/Button';
 import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
+import ReactGA from 'react-ga';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -69,6 +70,10 @@ function App() {
       return categoryValue;
     }
   }
+
+  ReactGA.initialize('G-DGTK9CB1L0');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+  ReactGA.send({hitType: "pageview", page: "/"})
 
   return (
     <BrowserRouter>

@@ -8,8 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
 import ChatBot from '../components/ChatBot';
-// import data from '../data';
-
+import ReactGA from 'react-ga';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -43,6 +42,8 @@ function HomeScreen() {
       // setProducts(result.data);
     };
     fetchData();
+
+    ReactGA.pageview(window.location.pathname);
   }, []);
   return (
     <div>
