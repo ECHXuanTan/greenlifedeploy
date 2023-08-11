@@ -13,6 +13,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../store';
+import ReactGA from 'react-ga4';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -53,6 +54,14 @@ function ProductScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
   const addToCartHandler = async () => {
+    ReactGA.event({
+      category: "your category",
+      action: "your action",
+      label: "your label", // optional
+      value: 99, // optional, must be a number
+      nonInteraction: true, // optional, true/false
+      transport: "xhr", // optional, beacon/xhr/image
+    });
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`https://greenlife-deploy-5.onrender.com/api/products/${product._id}`);

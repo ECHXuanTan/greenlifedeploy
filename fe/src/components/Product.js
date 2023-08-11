@@ -5,7 +5,7 @@ import Rating from './Rating';
 import axios from 'axios';
 import { useContext } from 'react';
 import { Store } from '../store';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 function Product(props) {
   const { product } = props;
@@ -17,9 +17,12 @@ function Product(props) {
 
   const addToCartHandler = async (item) => {
     ReactGA.event({
-      category: 'Button',
-      action: 'Click',
-      label: 'Add to Cart',
+      category: "your category",
+      action: "your action",
+      label: "your label", // optional
+      value: 99, // optional, must be a number
+      nonInteraction: true, // optional, true/false
+      transport: "xhr", // optional, beacon/xhr/image
     });
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
