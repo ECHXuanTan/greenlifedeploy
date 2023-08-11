@@ -30,11 +30,13 @@ import Button from 'react-bootstrap/Button';
 import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+  const Tracking_ID = 'G-DGTK9CB1L0';
+  ReactGA.initialize(Tracking_ID);
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -58,8 +60,8 @@ function App() {
     };
     fetchCategories();
 
-    ReactGA.initialize('G-0JYSVN9CGK');
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    
+    ReactGA.send({hittype: "pageview", page: '/'});
   }, []);
 
   function renderUI(categoryValue) {
