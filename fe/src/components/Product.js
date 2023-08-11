@@ -16,6 +16,7 @@ function Product(props) {
   } = state;
 
   const addToCartHandler = async (item) => {
+    ReactGA.event({'category': 'test', 'action': 'submit', 'label': 'label'});
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`https://greenlife-deploy-5.onrender.com/api/products/${item._id}`);
@@ -52,7 +53,7 @@ function Product(props) {
             Hết hàng
           </Button>
         ) : (
-          <Button onClick={() => addToCartHandler(product)}>Thêm vào giỏ hàng</Button>
+          <Button id ="addToCartHandler" onClick={() => addToCartHandler(product)}>Thêm vào giỏ hàng</Button>
         )}
       </Card.Body>
     </Card>
