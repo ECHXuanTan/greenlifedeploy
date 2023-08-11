@@ -55,12 +55,9 @@ function ProductScreen() {
   const { cart } = state;
   const addToCartHandler = async () => {
     ReactGA.event({
-      category: "your category",
-      action: "your action",
-      label: "your label", // optional
-      value: 99, // optional, must be a number
-      nonInteraction: true, // optional, true/false
-      transport: "xhr", // optional, beacon/xhr/image
+      category: "Button",
+      action: "click",
+      label: "add_to_cart", // optional
     });
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;

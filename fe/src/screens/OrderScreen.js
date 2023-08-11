@@ -13,6 +13,7 @@ import MessageBox from '../components/MessageBox';
 import { Store } from '../store';
 import { getError } from '../utils';
 import { toast } from 'react-toastify';
+import ReactGA from 'react-ga4';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -83,6 +84,13 @@ export default function OrderScreen() {
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
         toast.success('Thanh toán thành công');
+        ReactGA.event({
+          category: "Ecommerce",
+          action: "Purchase",
+          label: "payment", 
+          value: order.totalPrice / 24000,
+          currency: "USD",
+        });
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
@@ -152,6 +160,7 @@ export default function OrderScreen() {
       }
     } else {
       const loadPaypalScript = async () => {
+       
         const { data: clientId } = await axios.get('https://greenlife-deploy-5.onrender.com/api/keys/paypal', {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
