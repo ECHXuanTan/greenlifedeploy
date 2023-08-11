@@ -32,9 +32,6 @@ import axios from 'axios';
 import SearchBox from './components/SearchBox';
 import ReactGA from 'react-ga';
 
-ReactGA.initialize('G-DGTK9CB1L0');
-ReactGA.pageview(window.location.pathname + window.location.search);
-
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -60,6 +57,9 @@ function App() {
       }
     };
     fetchCategories();
+
+    ReactGA.initialize('G-DGTK9CB1L0');
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
   function renderUI(categoryValue) {

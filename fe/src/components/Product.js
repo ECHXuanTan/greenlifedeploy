@@ -16,16 +16,15 @@ function Product(props) {
   } = state;
 
   const addToCartHandler = async (item) => {
-    ReactGA.event({'category': 'test', 'action': 'submit', 'label': 'label'});
+    ReactGA.event({
+      category: 'Button',
+      action: 'Click',
+      label: 'Add to Cart',
+    });
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`https://greenlife-deploy-5.onrender.com/api/products/${item._id}`);
-    ReactGA.event({
-      category: data.category,
-      action: 'test action',
-      label: 'test label',
-      value: data.price,
-    })
+    
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;

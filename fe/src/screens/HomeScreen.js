@@ -42,8 +42,6 @@ function HomeScreen() {
       // setProducts(result.data);
     };
     fetchData();
-
-    ReactGA.pageview(window.location.pathname);
   }, []);
   return (
     <div>
