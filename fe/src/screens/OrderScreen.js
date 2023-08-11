@@ -110,7 +110,7 @@ export default function OrderScreen() {
   useEffect(() => {
 
     const script = document.createElement('script');
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=TAG_ID';
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DGTK9CB1L0';
         script.async = true;
         document.head.appendChild(script);
 
@@ -120,7 +120,7 @@ export default function OrderScreen() {
                 window.dataLayer.push(arguments);
             }
             gtag('js', new Date());
-            gtag('config', 'TAG_ID');
+            gtag('config', 'G-DGTK9CB1L0');
         };
 
      // Create a URLSearchParams object
