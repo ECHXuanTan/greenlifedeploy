@@ -58,7 +58,7 @@ function App() {
     };
     fetchCategories();
 
-    ReactGA.initialize('G-DGTK9CB1L0');
+    ReactGA.initialize('G-0JYSVN9CGK');
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
