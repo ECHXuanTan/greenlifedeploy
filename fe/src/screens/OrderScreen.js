@@ -84,13 +84,12 @@ export default function OrderScreen() {
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
         toast.success('Thanh toán thành công');
-        ReactGA.event({
-          category: "Ecommerce",
-          action: "Purchase",
-          label: "payment", 
+        const purchaseEventData = {
+          transaction_id: orderId,
           value: order.totalPrice / 24000,
-          currency: "USD",
-        });
+          currency: 'USD',
+        }
+        ReactGA.event(purchaseEventData);
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
