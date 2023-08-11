@@ -84,12 +84,7 @@ export default function OrderScreen() {
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
         toast.success('Thanh toán thành công');
-        const purchaseEventData = {
-          transaction_id: orderId,
-          value: order.totalPrice / 24000,
-          currency: 'USD',
-        }
-        ReactGA.event(purchaseEventData);
+        handlePurchaseClick();
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
@@ -100,9 +95,33 @@ export default function OrderScreen() {
     toast.error(getError(err));
   }
 
+  const handlePurchaseClick = () => {
+    window.dataLayer.push({
+        event: 'purchase',
+        transaction_id: orderId,
+        value: order.totalPrice / 24000,
+        tax: 0,
+        shipping: 0,
+        currency: 'USD',
+        coupon: 'SUMMER_SALE',
+    });
+};
+
   useEffect(() => {
 
-    
+    const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=TAG_ID';
+        script.async = true;
+        document.head.appendChild(script);
+
+        script.onload = () => {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                window.dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'TAG_ID');
+        };
 
      // Create a URLSearchParams object
   const urlParams = new URLSearchParams(window.location.search);
