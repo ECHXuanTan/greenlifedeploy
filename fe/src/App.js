@@ -72,8 +72,8 @@ function App() {
   }
 
   ReactGA.initialize('G-DGTK9CB1L0');
-  ReactGA.pageview(window.location.pathname + window.location.search);
-  ReactGA.send({hitType: "pageview", page: "/"})
+  // ReactGA.pageview(window.location.pathname + window.location.search);
+
 
   return (
     <BrowserRouter>
