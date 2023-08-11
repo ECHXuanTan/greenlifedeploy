@@ -35,10 +35,6 @@ function reducer(state, action) {
   }
 }
 
-const instance = axios.create({
-  baseURL: 'https://greenlife-deploy-5.onrender.com',
-});
-
 export default function OrderScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -173,9 +169,9 @@ export default function OrderScreen() {
   }, [order, userInfo, orderId, navigate, paypalDispatch, successPay]);
 
   function onVnpayClick() {
-    const returnUrl = `http://localhost:3000/order/${order._id}`
+    const returnUrl = `https://greenlife-deploy-5.onrender.com/order/${order._id}`
 
-    instance.get('/api/vnpayRouter/create_payment_url', {
+    axios.get('https://greenlife-deploy-5.onrender.com/api/vnpayRouter/create_payment_url', {
       params: {
         amount: order.totalPrice, // Set the amount as order.totalPrice
         returnUrl,
