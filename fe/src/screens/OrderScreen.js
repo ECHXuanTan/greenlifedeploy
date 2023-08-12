@@ -84,7 +84,6 @@ export default function OrderScreen() {
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
         toast.success('Thanh toán thành công');
-        handlePurchaseClick();
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
@@ -95,33 +94,47 @@ export default function OrderScreen() {
     toast.error(getError(err));
   }
 
-  const handlePurchaseClick = () => {
-    window.dataLayer.push({
-        event: 'purchase',
-        transaction_id: orderId,
-        value: order.totalPrice / 24000,
-        tax: 0,
-        shipping: 0,
-        currency: 'USD',
-        coupon: 'SUMMER_SALE',
-    });
-};
+
 
   useEffect(() => {
 
-    const script = document.createElement('script');
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DGTK9CB1L0';
-        script.async = true;
-        document.head.appendChild(script);
+    const purchaseButton = document.getElementById('purchase');
 
-        script.onload = () => {
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                window.dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', 'G-DGTK9CB1L0');
-        };
+    const handlePurchaseClick = () => {
+      window.gtag('event', 'purchase', {
+        transaction_id: 'T_12345_3',
+        value: 25.42,
+        tax: 4.90,
+        shipping: 5.99,
+        currency: 'USD',
+        coupon: 'SUMMER_SALE',
+        items: [
+          {
+            item_id: 'SKU_12345',
+            item_name: 'Stan and Friends Tee',
+            affiliation: 'Google Merchandise Store',
+            coupon: 'SUMMER_FUN',
+            discount: 2.22,
+            index: 0,
+            item_brand: 'Google',
+            item_category: 'Apparel',
+            item_category2: 'Adult',
+            item_category3: 'Shirts',
+            item_category4: 'Crew',
+            item_category5: 'Short sleeve',
+            item_list_id: 'related_products',
+            item_list_name: 'Related Products',
+            item_variant: 'green',
+            location_id: 'ChIJIQBpAG2ahYAR_6128GcTUEo',
+            price: 9.99,
+            quantity: 1,
+          },
+        ],
+      });
+    };
+
+    purchaseButton.addEventListener('click', handlePurchaseClick);
+    
 
      // Create a URLSearchParams object
   const urlParams = new URLSearchParams(window.location.search);
@@ -218,6 +231,15 @@ export default function OrderScreen() {
     <div>
       <Helmet>
         <title>Đơn hàng {orderId}</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGTK9CB1L0"></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DGTK9CB1L0',{ 'debug_mode': true });
+          `}
+        </script>
       </Helmet>
       <h1 className="my-3">Đơn hàng {orderId}</h1>
       <Row>
@@ -320,6 +342,7 @@ export default function OrderScreen() {
                     ) : (
                       <div>
                         <PayPalButtons
+                        id="purchase"
                           createOrder={createOrder}
                           onApprove={onApprove}
                           onError={onError}
