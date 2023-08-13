@@ -86,16 +86,16 @@ export default function OrderScreen() {
         toast.success('Thanh toán thành công');
         ReactGA.event({
           category: "Button",
-          action: "Purchase",
+          action: "purchase",
           label: "click",
-          value: order.totalPrice / 24000,
+          value: order.totalPrice
         });
         ReactGA.gtag('event', 'purchase', {
-          transaction_id: 'T_12345_3',
-          value: 25.42,
-          tax: 4.90,
-          shipping: 5.99,
-          currency: 'USD',
+          transaction_id: 'T_12365_3',
+          value: order.totalPrice,
+          tax: 0,
+          shipping: 0,
+          currency: 'VND',
           coupon: 'SUMMER_SALE',
           items: [
             {
