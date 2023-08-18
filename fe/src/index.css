@@ -149,3 +149,25 @@ main {
     color: white;
     background-color:rgb(12, 91, 12) ;
 }
+
+
+.share-button {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #1877f2;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.share-button:hover {
+  background-color: #1559b4;
+}
+
+.share-button svg {
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}

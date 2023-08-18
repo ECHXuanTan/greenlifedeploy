@@ -14,6 +14,9 @@ import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../store';
 import ReactGA from 'react-ga4';
+import { FacebookShareButton } from 'react-share';
+import { FaFacebook } from 'react-icons/fa';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -120,6 +123,12 @@ function ProductScreen() {
               Mô tả sản phẩm:
               <p>{product.description}</p>
             </ListGroup.Item>
+            <ListGroup.Item>
+                <FacebookShareButton url={window.location.href}>
+                  <FaFacebook />
+                  <span>Chia sẻ</span>
+                </FacebookShareButton>
+              </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
