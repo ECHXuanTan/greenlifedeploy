@@ -49,6 +49,15 @@ function ProductScreen() {
       }
     };
     fetchData();
+
+    const loadFacebookSDK = () => {
+      const fbScript = document.createElement('script');
+      fbScript.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0';
+      fbScript.async = true;
+      document.getElementById('fb-root').appendChild(fbScript);
+    };
+
+    loadFacebookSDK();
   }, [slug]);
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -73,12 +82,6 @@ function ProductScreen() {
     navigate('/cart');
   };
 
-  const shareToFacebook = () => {
-    const shareUrl = window.location.href;
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
-  };
-
-
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -98,11 +101,11 @@ function ProductScreen() {
             <ListGroup.Item>
               <Helmet>
                 <title>{product.name}</title>
-                <meta property="og:type" content="product" />
-                <meta property="og:url" content={`https://deploy-fe-greenlife.onrender.com/product/${product.slug}`} />
                 <meta property="og:title" content={product.name} />
                 <meta property="og:description" content={product.description} />
                 <meta property="og:image" content={product.image} />
+                <meta property="og:url" content={window.location.href} />
+                <meta property="og:type" content="website" />
               </Helmet>
               <h1>{product.name}</h1>
             </ListGroup.Item>
@@ -117,10 +120,7 @@ function ProductScreen() {
               Mô tả sản phẩm:
               <p>{product.description}</p>
             </ListGroup.Item>
-            <Button onClick={shareToFacebook} variant="info" className="mt-2">
-            Chia sẻ lên Facebook
-          </Button>
-          </ListGroup>  
+          </ListGroup>
         </Col>
         <Col md={3}>
           <Card>
@@ -157,6 +157,7 @@ function ProductScreen() {
           </Card>
         </Col>
       </Row>
+      <div className="fb-share-button" data-href={window.location.href} data-layout="button_count" />
     </div>
   );
 }
