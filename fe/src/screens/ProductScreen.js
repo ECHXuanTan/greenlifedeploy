@@ -85,11 +85,7 @@ function ProductScreen() {
     navigate('/cart');
   };
 
-  return loading ? (
-    <LoadingBox />
-  ) : error ? (
-    <MessageBox variant="danger">{error}</MessageBox>
-  ) : (
+  return loading (
     <div>
       <Row className='product-detail'>
         <Col md={6}>
