@@ -73,6 +73,12 @@ function ProductScreen() {
     navigate('/cart');
   };
 
+  const shareToFacebook = () => {
+    const shareUrl = window.location.href;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+  };
+
+
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -92,6 +98,11 @@ function ProductScreen() {
             <ListGroup.Item>
               <Helmet>
                 <title>{product.name}</title>
+                <meta property="og:type" content="product" />
+                <meta property="og:url" content={`https://deploy-fe-greenlife.onrender.com/product/${product.slug}`} />
+                <meta property="og:title" content={product.name} />
+                <meta property="og:description" content={product.description} />
+                <meta property="og:image" content={product.image} />
               </Helmet>
               <h1>{product.name}</h1>
             </ListGroup.Item>
@@ -106,7 +117,10 @@ function ProductScreen() {
               Mô tả sản phẩm:
               <p>{product.description}</p>
             </ListGroup.Item>
-          </ListGroup>
+            <Button onClick={shareToFacebook} variant="info" className="mt-2">
+            Chia sẻ lên Facebook
+          </Button>
+          </ListGroup>  
         </Col>
         <Col md={3}>
           <Card>

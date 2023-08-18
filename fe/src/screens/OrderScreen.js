@@ -91,10 +91,8 @@ export default function OrderScreen() {
         //   value: order.totalPrice
         // });
         ReactGA.gtag('event', 'purchase', {
-          transaction_id: Math.random(0, 9999),
+          transaction_id: order._id,
           value: order.totalPrice,
-          tax: 0,
-          shipping: 0,
           currency: 'VND',
         });
       } catch (err) {
